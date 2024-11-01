@@ -36,18 +36,18 @@ return {
                 config = function()
                     local ls = require("luasnip")
 
-                    vim.keymap.set({"i"}, "<C-L>", function() ls.expand() end, {silent = true})
-                    vim.keymap.set({"i", "s"}, "<C-K>", function() ls.jump( 1) end, {silent = true})
-                    vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
+                    vim.keymap.set({ "i" }, "<C-L>", function() ls.expand() end, { silent = true })
+                    vim.keymap.set({ "i", "s" }, "<C-K>", function() ls.jump(1) end, { silent = true })
+                    vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(-1) end, { silent = true })
 
-                    vim.keymap.set({"i", "s"}, "<C-E>", function()
+                    vim.keymap.set({ "i", "s" }, "<C-E>", function()
                         if ls.choice_active() then
                             ls.change_choice(1)
                         end
-                    end, {silent = true})
+                    end, { silent = true })
 
                     -- specify the full path...
-                    require("luasnip.loaders.from_snipmate").lazy_load({paths = "~/.config/nvim/snippets"})
+                    require("luasnip.loaders.from_snipmate").lazy_load({ paths = "~/.config/nvim/snippets" })
                 end,
             },
         },
@@ -62,8 +62,8 @@ return {
 
             cmp.setup({
                 sources = {
-                    {name = 'nvim_lsp'},
-                    {name = 'buffer'},
+                    { name = 'nvim_lsp' },
+                    { name = 'buffer' },
                 },
                 experimental = {
                     ghost_text = true
@@ -115,11 +115,11 @@ return {
     -- LSP
     {
         'neovim/nvim-lspconfig',
-        cmd = {'LspInfo', 'LspInstall', 'LspStart'},
-        event = {'BufReadPre', 'BufNewFile'},
+        cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
+        event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'williamboman/mason-lspconfig.nvim'},
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'williamboman/mason-lspconfig.nvim' },
         },
         config = function()
             -- This is where all the LSP shenanigans will live
@@ -131,7 +131,7 @@ return {
             lsp_zero.on_attach(function(client, bufnr)
                 -- see :help lsp-zero-keybindings
                 -- to learn the available actions
-                lsp_zero.default_keymaps({buffer = bufnr})
+                lsp_zero.default_keymaps({ buffer = bufnr })
             end)
 
             require('mason-lspconfig').setup({
