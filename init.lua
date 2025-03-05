@@ -7,6 +7,7 @@ vim.opt.expandtab = true
 vim.wo.number = true
 vim.wo.relativenumber = true
 vim.opt.timeoutlen = 500
+vim.opt.foldmethod = "marker"
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     buffer = buffer,

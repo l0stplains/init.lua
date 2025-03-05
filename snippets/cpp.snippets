@@ -1,20 +1,90 @@
 snippet beg
+	// {{{ Setup
 	#include<bits/stdc++.h>
 	
 	using namespace std;
-	typedef long long ll; 
-	
+
+	template<typename T>
+	typename enable_if<is_arithmetic<T>::value && !is_same<T, bool>::value && !is_same<T, char>::value, void>::type
+	__print(const T &x) {
+		cerr << x;
+	}
+
+	void __print(bool x) { cerr << (x ? "true" : "false"); }
+	void __print(char x) { cerr << '\'' << x << '\''; }
+	void __print(const char *x) { cerr << '\"' << x << '\"'; }
+	void __print(const string &x) { cerr << '\"' << x << '\"'; }
+
+	template<typename T, typename V>
+	void __print(const pair<T, V> &x) {
+		cerr << '{';
+		__print(x.first);
+		cerr << ", ";
+		__print(x.second);
+		cerr << '}';
+	}
+
+	template<typename... Args>
+	void __print(const tuple<Args...>& t) {
+		cerr << "(";
+		std::apply([](const auto&... elems) {
+			size_t n = 0;
+			((cerr << (n++ ? ", " : ""), __print(elems)), ...);
+		}, t);
+		cerr << ")";
+	}
+
+	template<typename T>
+	typename enable_if<!is_arithmetic<T>::value, void>::type
+	__print(const T &x) {
+		cerr << '{';
+		bool first = true;
+		for (const auto &elem : x) {
+			if (!first) { cerr << ", "; }
+			first = false;
+			__print(elem);
+		}
+		cerr << '}';
+	}
+
+	void _print() { cerr << "]\n"; }
+
+	template <typename T, typename... V>
+	void _print(T t, V... v) {
+		__print(t);
+		if (sizeof...(v)) { cerr << ", "; }
+		_print(v...);
+	}
+
+	// Debug macro: active only when ONLINE_JUDGE is not defined.
+	#ifndef ONLINE_JUDGE
+		#define debug(...) cerr << "[" << #__VA_ARGS__ << "] = ["; _print(__VA_ARGS__)
+	#else
+		#define debug(...)
+	#endif
+
+	typedef long long ll;
+	typedef vector<int> vi;
+	typedef vector<ll> vll;
+	typedef pair<int, int> pii;
+	typedef pair<ll, ll> pll;
+	typedef vector<pii> vpi;
+	typedef vector<pll> vpl;
+
 	#define el "\n"
 	#define F first
 	#define S second
 	#define pb push_back
 	#define mp make_pair
+	#define all(x) (x).begin(), (x).end()
 	#define fast cin.sync_with_stdio(0); cin.tie(0);
 	
-	const ll INF = numeric_limits<int>::max();
-	const ll MOD = 1e9 + 7;
-	const int mod = 99824435;
+	const int INF = numeric_limits<int>::max();
+	const ll INF_LL = numeric_limits<ll>::max();
+	const ll MOD_LL = 1e9 + 7;
+	const int MOD = 998244353;
 
+	// }}} End Setup
 	void solve() {
 
     	${0}
